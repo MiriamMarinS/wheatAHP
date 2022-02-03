@@ -4,17 +4,39 @@ Implementation of the Analytic Hierarchy Process (AHP) to obtain the immunogenic
 # **Immunogenic score for 20-amino acid oligopeptides of wheat**
 
 In the work of Tye-Din *et al.* (2010), they present a table of content with a score for each 20–amino acid oligopeptide based on their average relative frequency (mean normalized response of donor who responded to at least one peptide) of specific T cells present in blood. The 20-amino acid oligopeptides were pretreated with tissue transglutaminase (tTG). The wheat/barley/rye gluten peptide library design is described in Tye-Din's work.
+\
+\
+\
+*TYE-DIN, Jason A., et al. Comprehensive, quantitative mapping of T cell epitopes in gluten in celiac disease. Science translational medicine, 2010, vol. 2, no 41, p. 41ra51-41ra51.*
 
+# **Search epitopes in oligopeptides**
 We search for CD epitopes in the peptide library.
-The 20-amino acid oligopeptides related to scores were presented without deamidation: we search non-deamidated epitopes in the peptide library.
+The 20-amino acid oligopeptides related to scores were presented without deamidation: we search non-deamidated epitopes in the peptide library. We assign to each epitope the maximum score value of the oligopeptide in which it is found.
 
-TYE-DIN, Jason A., et al. Comprehensive, quantitative mapping of T cell epitopes in gluten in celiac disease. Science translational medicine, 2010, vol. 2, no 41, p. 41ra51-41ra51.
+# **AHP method**
+With the ahpy python module (```pip install ahpy```), we assign a immunogenicity score to each genotype.
+The method is divided on three criteria:
+* Criteria 1: Epitopes vs amplicons.
+* Criteria 2:
+  * Criteria 2 epitopes:
+    * Pair-wise comparisons between epitopes based on Tye-Din immunogenicity scores.
+  * Criteria 2 amplicons:
+    * Pair-wise comparisons between amplicons based on the number of epitopes in each one.
+* Criteria 3:
+  * Criteria 3 epitopes.
+    * Pair-wise comparisons between lines based on the frequency of each epitope in them.
+  * Criteria 3 amplicons.
+    * Pair-wise comparisons between lines based on the frequency of each amplicon type (by number of epitopes in them) in each one.
+# **Running the method**
 
 ```
 python wheatAHP.py -i ./Input/Data_matrix_AHP.csv -o ./results/ -e ./Input/epitopes.fasta -d yes -ol ./Input/20_oligopeptides_scores.txt
 ```
 
-# **Scores**
-For each genotypes, a immunogenic score is assigned.
+# **Scores and AHP graph**
+For each genotypes, a immunogenic score is assigned. For representation, the mean of score values changing the instensity value between epitopes and amplicons pair-wise comparisons in criteria 1 is calculated, and the standar deviation.
+
 *Output: table_scores.txt*
+
 ![alt text](./results/Figure_scores.png?raw=true)
+**Figure.** Immunogenicity score per each genotype. The genus (BW: bread wheat, DW: durum wheat, HT: Tritordeum) and the presence of rye (N: no, Y: yes) are indicated. The mean of scores (changing intensity values in the criteria 1) and the standard deviation (bars) are represented.
