@@ -17,4 +17,4 @@ python wheatAHP.py -i ./Input/Data_matrix_AHP.csv -o ./results/ -e ./Input/epito
 # **Scores**
 For each genotypes, a immunogenic score is assigned.
 *Output: table_scores.txt*
-![alt text](./results/Figure_score.png?raw=true)
+![alt text](./results/Figure_scores.png?raw=true)
