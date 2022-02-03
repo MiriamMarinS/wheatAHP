@@ -29,6 +29,7 @@ The method is divided on three criteria:
     * Pair-wise comparisons between lines based on the frequency of each amplicon type (by number of epitopes in them) in each one.
 
 ![alt text](./results/Diagram.png?raw=true)
+
 **Figure.** Diagram of the three criteria for AHP method.
 
 # **Running the method**
@@ -45,4 +46,5 @@ For each genotypes, a immunogenic score is assigned. For representation, the mea
 Figure_scores.R
 
 ![alt text](./results/Figure_scores.png?raw=true)
+
 **Figure.** Immunogenicity score per each genotype. The genus (BW: bread wheat, DW: durum wheat, HT: Tritordeum) and the presence of rye (N: no, Y: yes) are indicated. The mean of scores (changing intensity values in the criteria 1) and the standard deviation (bars) are represented.
