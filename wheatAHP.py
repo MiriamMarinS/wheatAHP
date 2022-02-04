@@ -30,12 +30,12 @@ def main():
         ahpy_criteria2_genes, list_genes = criteria2gene(rawdata, Epsilon) # Intensity values for each amplicon comparison based on number of epitopes in them.
 
         # Criteria 3:
-        ahpy_criteria3_epitopes = criteria3epitope(rawdata, Epsilon, epitopes_with_score)
+        ahpy_criteria3_epitopes = criteria3epitope(rawdata, Epsilon, epitopes_with_score) # Intensity values between lines for each epitope based on the epitope frequency in each one.
         ahpy_criteria2_epitopes.add_children(ahpy_criteria3_epitopes)
-        ahpy_criteria3_genes = criteria3gene(rawdata, Epsilon, list_genes)
+        ahpy_criteria3_genes = criteria3gene(rawdata, Epsilon, list_genes) # Intensity values between lines for each amplicon type based on the amplicon frequency in each one.
         ahpy_criteria2_genes.add_children(ahpy_criteria3_genes)
         ahpy_criteria1.add_children([ahpy_criteria2_epitopes, ahpy_criteria2_genes])
-        ahpy_dict[intensity] = ahpy_criteria1.target_weights
+        ahpy_dict[intensity] = ahpy_criteria1.target_weights # Scores for each line.
     
     scores = pd.DataFrame(data=ahpy_dict)
     scoresdata = pd.concat([scores, scores.mean(axis=1).rename('mean'), scores.std(axis=1).rename('sd')], axis=1)
