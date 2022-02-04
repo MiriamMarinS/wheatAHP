@@ -21,18 +21,11 @@ def comparison(comparisons_list, Epsilon, type, oligoEpitopes=None):
         except:
             continue
         dict_comparisons[comparison] = z
-        if z > higher_ratio:
-            if z > 0.0:
-                higher_ratio = z
-        if z < lower_ratio:
-            if z < 0.0:
-                lower_ratio = z    
-    if higher_ratio < 0.0:
-        print("The higher ratio is not upper than 1.0.")
-    if lower_ratio > 0.0:
-        print("The lower ratio is upper than 1.0.")
+        if z > higher_ratio and z > 0.0: higher_ratio = z
+        if z < lower_ratio and z < 0.0: lower_ratio = z    
+    if higher_ratio < 0.0: print("The higher ratio is not upper than 1.0.")
+    if lower_ratio > 0.0: print("The lower ratio is upper than 1.0.")
     new_dict_comparisons = {}
-
     for k, v in dict_comparisons.items():
         if v > 0.0:
             w = (v*9)/higher_ratio
@@ -68,20 +61,13 @@ def AHP_preparation(data_epitopes, new_data, genotypes_pairs, Epsilon):
             except:
                 continue
             comparison_dict[genotypes] = ratio
-            if ratio > higher_ratio:
-                if ratio > 0.0:
-                    higher_ratio = ratio
-            if ratio < lower_ratio:
-                if ratio < 0.0:
-                    lower_ratio = ratio
-        if higher_ratio < 0.0:
-            print("The higher ratio is not upper than 0.")
-        if lower_ratio > 0.0:
-            print("The lower ratio is upper than 0.")
+            if ratio > higher_ratio and ratio > 0.0: higher_ratio = ratio
+            if ratio < lower_ratio and ratio < 0.0: lower_ratio = ratio
+        if higher_ratio < 0.0: print("The higher ratio is not upper than 0.")
+        if lower_ratio > 0.0: print("The lower ratio is upper than 0.")
         new_comparison_dict = {}
         for k, v in comparison_dict.items():
-            if v == 0.0:
-                new_comparison_dict[k] = 1
+            if v == 0.0: new_comparison_dict[k] = 1
             if v > 0.0:
                 value = (v*9)/higher_ratio
                 new_value = min(intensity_high, key=lambda x:abs(x-value))

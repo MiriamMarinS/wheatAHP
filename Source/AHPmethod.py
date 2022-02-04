@@ -1,9 +1,8 @@
-from Source.utils import comparison
+from Source.utils import comparison, AHP_preparation
 import itertools
 import ahpy
 import pandas as pd
 import numpy as np
-from Source.utils import AHP_preparation
 
 def criteria1(epitopes_genes_comparisons):
     ahpy_criteria1 = ahpy.Compare(name="Epitopes_genes", comparisons=epitopes_genes_comparisons, precision=3)
@@ -17,7 +16,7 @@ def criteria2epitope(oligoEpitopes, Epsilon):
     epitopesOther = ["DQ2.5_glia_w1", "DQ2.5_hor_2"]
     listEpitopes = epitopesAlpha + epitopesGamma + epitopesOther
     epitopes_with_score = []
-    for epitopeID, score in oligoEpitopes.items():
+    for epitopeID in list(oligoEpitopes.keys()):
         if epitopeID in listEpitopes:
             epitopes_with_score.append(epitopeID)
     comparisons_list_epitopes = list(itertools.combinations(epitopes_with_score, 2)) # All possible combinations of epitopes for pair-wise comparisons.
