@@ -48,3 +48,14 @@ Figure_scores.R
 ![alt text](./results/Figure_scores.png?raw=true)
 
 **Figure.** Immunogenicity score per each genotype. The genus (BW: bread wheat, DW: durum wheat, HT: Tritordeum) and the presence of rye (N: no, Y: yes) are indicated. The mean of scores (changing intensity values in the criteria 1) and the standard deviation (bars) are represented.
+
+# **Searching epitopes in NGS amplicons**
+For searching epitopes and epitope variants with 1 or more mismatches in amplicon sequences of alpha and gamma gliadins and calculating their relative abundance in lines. In addition, calculation of the ratio of relative abundance variation between the epitope variant and the original epitope for each line is also implemented.
+
+```
+python ./findEpmismatch.py -i </path/to/file with amplicon frequencies in lines> -o </path/to/output dir> -e </path/to/epitopes fasta file> -d <remove epitope duplications: yes | no> -p <output prefix> -m <number of mismatches: 0, 1, ...> -a </path/to/amplicon peptides fasta file> -ep </path/to/file with epitope frequencies in lines>
+```
+
+**Output:**
+* File with frequencies of epitope variants in lines, tsv format.
+* File with ratio of frequency variation between the epitope variant and the original epitope, tsv format.

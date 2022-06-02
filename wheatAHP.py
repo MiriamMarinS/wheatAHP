@@ -7,7 +7,7 @@ from Source.epitope import Epitope
 from Source.AHPmethod import criteria1, criteria2epitope, criteria2gene, criteria3epitope, criteria3gene
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--input", help = "/path/to/input file with usearch frquencies results.")
+parser.add_argument("-i", "--input", help = "/path/to/input file with usearch frequencies results.")
 parser.add_argument("-o", "--path_output", help = "/path/to/ output files directory.", default="./")
 parser.add_argument("-e", "--epitopes", help = "/path/to/epitope fasta file.")
 parser.add_argument("-d", "--remove_epitope_duplication", help = "Remove epitope with duplicated sequences. Optios = yes | no.", default="yes")

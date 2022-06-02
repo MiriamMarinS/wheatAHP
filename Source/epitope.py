@@ -1,6 +1,9 @@
+from genericpath import exists
 from Bio import SeqIO
 import pandas as pd
 import numpy as np
+from Source.utils import variants
+import math
 
 class Epitope():
     def __init__(self, epitopesFile, removeDuplications):
@@ -62,3 +65,40 @@ class Epitope():
         for epitopeID, scores in epitopeScores.items():
             epitopemaxScore[epitopeID] = max(scores)
         return(epitopemaxScore)
+    
+    def epitopemismatch(self, mismatch_allowed, table_freq, amp_dict):
+        self.amp_dict = amp_dict
+        self.mismatch_allowed = mismatch_allowed
+        self.table_freq = table_freq
+        index = 0
+        for column in list(table_freq.columns): # column = line.
+            if index == 0:
+                self.table_temp = variants(self.library, self.amp_dict, self.mismatch_allowed, self.table_freq, column)
+            else:
+                self.table_temp = pd.merge(self.table_temp,
+                    variants(self.library, self.amp_dict, self.mismatch_allowed, self.table_freq, column)
+                    , left_on = ['Variant', 'Original'], right_on = ['Variant', 'Original'], how = 'outer')
+            index += 1
+        return(self.table_temp)
+    
+    def epitope_index(self, table_epitope_freq):
+        self.table_epitope_freq = table_epitope_freq
+        dict_epitopes = {}
+        epsilon = 0.0000001
+        dict_epitopes["Variant"] = self.table_temp["Variant"]
+        dict_epitopes["Original"] = self.table_temp["Original"]
+        for index, row in self.table_temp.iterrows():
+            for column in list(self.table_temp.columns)[2:]:
+                if row["Original"] in self.table_epitope_freq.columns:
+                    freq_original = self.table_epitope_freq[row["Original"]][self.table_epitope_freq.index.values == column].values[0]
+                    freq_variant = row[column]
+                    ep = math.log(freq_variant + epsilon, 2) - math.log(freq_original + epsilon, 2)
+                    #ep = freq_variant/(freq_original + epsilon)
+                    #ep = row[column]/(self.table_epitope_freq[row["Original"]][self.table_epitope_freq.index.values == column].values[0] + epsilon)
+                    dict_epitopes.setdefault(column, []).append(ep)
+                else:
+                    dict_epitopes.setdefault(column, []).append(np.NaN)
+        self.table_epitope = pd.DataFrame(dict_epitopes, columns = list(self.table_temp.columns)) #table_variants = pd.DataFrame([k + (v,) for k, v in dict_variants.items()], columns=['Variant', 'Original', column]))
+        self.table_epitope = self.table_epitope.dropna()
+        self.table_epitope = self.table_epitope.reset_index(drop=True)
+        return(self.table_epitope)

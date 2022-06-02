@@ -1,5 +1,6 @@
 import math
 import ahpy
+import pandas as pd
 
 def comparison(comparisons_list, Epsilon, type, oligoEpitopes=None):
     intensity_high = [9, 8, 7, 6, 5, 4, 3, 2, 1]
@@ -80,3 +81,24 @@ def AHP_preparation(data_epitopes, new_data, genotypes_pairs, Epsilon):
         dict_epitopes[epitope] = Linefreq(epitope, new_comparison_dict)
         comparisons.append(ahpy.Compare(epitope, new_comparison_dict, precision=3))
     return(comparisons)
+
+def variants(library, amp_dict, mismatch_allowed, table_freq, column,):
+    dict_variants = {}
+    for epitopeID, epitopeSeq in library.items():
+        epitope_len = len(epitopeSeq)
+        for ampID, ampSeq in amp_dict.items():
+            for number in range(0, len(ampSeq) - epitope_len + 1):
+                amplicon = ampSeq[number:number + epitope_len]
+                mismatch = 0
+                position = 0
+                for aa in amplicon:
+                    N = epitopeSeq[position]
+                    if aa != N:
+                        mismatch += 1
+                    position += 1
+                if mismatch == mismatch_allowed: # epitope with mismatch_allowed.
+                    if amplicon not in list(library.values()): # The variant is another original epitope??
+                        if ampID in list(table_freq.index.values): # table freq only with putative genes, no stops codons, the fasta includes amps with stop codons.
+                            dict_variants[(amplicon, epitopeID)] = dict_variants.get((amplicon, epitopeID), 0) + table_freq.loc[ampID, column]
+    table_variants = pd.DataFrame([k + (v,) for k, v in dict_variants.items()], columns=['Variant', 'Original', column])
+    return(table_variants)
