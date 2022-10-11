@@ -30,6 +30,12 @@ The method is divided on three criteria:
 
 ![alt text](./results/Diagram.png?raw=true)
 
+```mermaid
+flowchart TD;
+
+  A(YES) ---> B(NO);
+```
+
 **Figure.** Diagram of the three criteria for AHP method.
 
 # **Running the method**
