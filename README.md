@@ -31,9 +31,12 @@ The method is divided on three criteria:
 ![alt text](./results/Diagram.png?raw=true)
 
 ```mermaid
-flowchart TD;
+flowchart LR;
 
-  A(YES) ---> B(NO);
+  A(Diagram) ---> B(Amplicons);
+  A ---> C(Epitopes);
+  B ---> A0(Amp_0) & A1(Amp_1) & A2(Amp_2) & A3(Amp_3) & A4(Amp_4) & A5(Amp_5) & A6(Amp_6) & A7(Amp_7) & A8(Amp_8) & A9(Amp_9) & A10(Amp_10) & A11(Amp_11) & A12(Amp_12) & A13(Amp_13) & A14(Amp_14);
+  C ---> E0(DQ2.5_glia_a1a) & E1(DQ2.5_glia_a1b) & E2(DQ2.5_glia_a2) & E3(DQ2.5_glia_g2a) & E4(DQ2.5_glia_g4e) & E5(DQ2.5_glia_g4d) & E6(DQ2.5_glia_g4b) & E7(DQ2.5_glia_g5) & E8(DQ2.5_glia_g4c) & E9(DQ2.5_glia_g3) & E10(DQ2.5_glia_g4a) & E11(DQ2.5_glia_w1) & E12(DQ2.5_glia_hor_2);
 ```
 
 **Figure.** Diagram of the three criteria for AHP method.
