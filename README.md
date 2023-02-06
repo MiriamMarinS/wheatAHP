@@ -42,7 +42,6 @@ The method is divided on three criteria:
     Pair-wise comparisons between lines based on the frequency of each amplicons 'type' (by number of epitopes in them) in each one.
     For each amplicon 'type', the intensity values were calculated obtaining the log2(FC) between the abundance of this 'type'' in the lines two by two. The final value was scaled from 2 to 9 for positive values, from 1/9 to 1/2 for negative values, and 1 when the amplicon 'type''s abundance were equal for both lines.
 
-![alt text](./results/Diagram.png?raw=true)
 
 ```mermaid
 flowchart LR;
