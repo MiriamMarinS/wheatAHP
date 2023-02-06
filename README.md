@@ -15,18 +15,32 @@ The 20-amino acid oligopeptides related to scores were presented without deamida
 
 # **AHP method**
 With the ahpy python module (```pip install ahpy```), we assign a immunogenicity score to each genotype.
+
+The AHP method is based on pair-wise comparisons. For each one, an intensity value is needed. The intensity value is the difference between both elements in the comparison. This difference can mean different things depending on the nature of the criterion. For example, in the 2nd level criterion related to the epitopes, the intensity value between two epitopes mean how much one epitope's immunogenicity is respect to the other epitope. In the following scheme, the intensity values calculation process is explained for each criterion.
+
 The method is divided on three criteria:
-* Criteria 1: Epitopes vs amplicons.
-* Criteria 2:
-  * Criteria 2 epitopes:
-    * Pair-wise comparisons between epitopes based on Tye-Din immunogenicity scores.
-  * Criteria 2 amplicons:
-    * Pair-wise comparisons between amplicons based on the number of epitopes in each one.
-* Criteria 3:
-  * Criteria 3 epitopes.
-    * Pair-wise comparisons between lines based on the frequency of each epitope in them.
-  * Criteria 3 amplicons.
-    * Pair-wise comparisons between lines based on the frequency of each amplicon type (by number of epitopes in them) in each one.
+* Criterion 1st level: Epitopes vs amplicons 'type'.
+
+  In this case, all the intensity values upper to zero permitted in the AHP method were used Z(1,9), so we run the method nine times. This was because we do not have prior information about which of the elements (epitope or amplicons 'type') has more influence in the immunogenicity of a line. We choosen the intensities upper to zero because we assumed that the epitope sequence has more relevance, but not how much relevant it is over the number of epitopes disposed in the same amplicon.
+
+* Criteria 2nd level:
+  * **Epitopes:**
+
+    To get the Pair-wise comparisons between epitopes based on the Tye-Din et a. (2010) immunogenic scores.
+    The intensity values were calculated obtaining the log2(FC) between the immunogenic score of the epitopes two by two. The final value was scaled from 2 to 9 for positive values, from 1/9 to 1/2 for negative values, and 1 when the scores were equal for both epitopes. As a result, the weight of each epitope based on their influence in the final immunogenic potential score is displayed.
+  * **Amplicons 'type':**
+
+    Pair-wise comparisons between amplicons based on the number of epitopes in each one.
+    The instensity values were calculated obtaining the log2(FC) between the number of epitopes present in each amplicons 'type' two by two. The final value was scaled from 2 to 9 for positive values and from 1/9 to 1/2 for negative values. As a result, the weight of each amplicon 'type' based on their influence in the final immunogenic potential score is displayed.
+* Alternative lines:
+  * **Epitopes:**
+    
+    Pair-wise comparisons between lines based on the frequency of each epitope in them.
+    For each epitope, the intensity values were calculated obtaining the log2(FC) between the abundance of this epitope in the lines two by two. The final value was scaled from 2 to 9 for positive values, from 1/9 to 1/2 for negative values, and 1 when the epitope's abundance were equal for both lines.
+  * **Amplicons 'types':**
+    
+    Pair-wise comparisons between lines based on the frequency of each amplicons 'type' (by number of epitopes in them) in each one.
+    For each amplicon 'type', the intensity values were calculated obtaining the log2(FC) between the abundance of this 'type'' in the lines two by two. The final value was scaled from 2 to 9 for positive values, from 1/9 to 1/2 for negative values, and 1 when the amplicon 'type''s abundance were equal for both lines.
 
 ![alt text](./results/Diagram.png?raw=true)
 
