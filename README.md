@@ -67,9 +67,9 @@ For each genotypes, a immunogenic score is assigned. For representation, the mea
 
 Figure_scores.R
 
-![alt text](./results/Figure_scores.png?raw=true)
+![alt text](./results/Score.png?raw=true)
 
-**Figure.** Immunogenicity score per each genotype. The genus (BW: bread wheat, DW: durum wheat, HT: Tritordeum) and the presence of rye (N: no, Y: yes) are indicated. The mean of scores (changing intensity values in the criteria 1) and the standard deviation (bars) are represented.
+**Figure.** Immunogenic potential score per each genotype. The genus (BW: bread wheat, DW: durum wheat, HT: Tritordeum) and the presence of rye (N: no, Y: yes) are indicated. The mean of scores (changing intensity values in the criteria 1) and the standard deviation (bars) are represented.
 
 # **Searching epitopes in NGS amplicons**
 For searching epitopes and epitope variants with 1 or more mismatches in amplicon sequences of alpha and gamma gliadins and calculating their relative abundance in lines. In addition, calculation of the ratio of relative abundance variation between the epitope variant and the original epitope for each line is also implemented.
