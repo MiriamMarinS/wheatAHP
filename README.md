@@ -19,11 +19,11 @@ With the ahpy python module (```pip install ahpy```), we assign a immunogenicity
 The AHP method is based on pair-wise comparisons. For each one, an intensity value is needed. The intensity value is the difference between both elements in the comparison. This difference can mean different things depending on the nature of the criterion. For example, in the 2nd level criterion related to the epitopes, the intensity value between two epitopes mean how much one epitope's immunogenicity is respect to the other epitope. In the following scheme, the intensity values calculation process is explained for each criterion.
 
 The method is divided on three criteria:
-* Criterion 1st level: Epitopes vs amplicons 'type'.
+* Criterion $1^{st}$ level: Epitopes vs amplicons 'type'.
 
   In this case, all the intensity values upper to zero permitted in the AHP method were used Z(1,9), so we run the method nine times. This was because we do not have prior information about which of the elements (epitope or amplicons 'type') has more influence in the immunogenicity of a line. We choosen the intensities upper to zero because we assumed that the epitope sequence has more relevance, but not how much relevant it is over the number of epitopes disposed in the same amplicon.
 
-* Criteria 2nd level:
+* Criteria $2^{nd}$ level:
   * **Epitopes:**
 
     To get the Pair-wise comparisons between epitopes based on the Tye-Din et a. (2010) immunogenic scores.
